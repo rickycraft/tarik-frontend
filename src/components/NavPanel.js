@@ -24,7 +24,7 @@ export class NavPanel extends Component {
 					<Navbar.Brand className="text-light m-0 p-0 ml-3">Tarik</Navbar.Brand>
 				</Navbar>
 				<Navbar bg="dark" variant="dark" className="text-light p-2 justify-content-between">
-					<Selector search className="d-flex flex-nowrap" />
+					<Selector className="d-flex flex-nowrap" />
 					<Commands checked={this.props.view} onClick={this.props.updateView} />
 					<FilterInput
 						className="d-flex"

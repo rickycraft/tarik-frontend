@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonSelector } from './ButtonSelector';
+import { services, filters } from '../../services/search';
 
 export class Selector extends Component {
 	constructor(props) {
@@ -8,8 +9,8 @@ export class Selector extends Component {
 		this.state = {
 			filter: 'empty',
 			service: 'all',
-			services: ['serv 1', 'serv 2', 'serv 3'],
-			filters: ['filt 1', 'filt 2', 'filt 3'],
+			services: services(),
+			filters: filters(),
 		};
 	}
 
