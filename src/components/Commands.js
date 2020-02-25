@@ -6,8 +6,12 @@ export class Commands extends Component {
 		return (
 			<div className="d-flex mr-2">
 				<ButtonGroup aria-label="prev-next">
-					<Button variant="info">{'<'}</Button>
-					<Button variant="info">{'>'}</Button>
+					<Button variant="info" onClick={() => this.props.updateBatch(-1)}>
+						{'<'}
+					</Button>
+					<Button variant="info" onClick={() => this.props.updateBatch(1)}>
+						{'>'}
+					</Button>
 				</ButtonGroup>
 				<div className="mr-3" />
 				<ButtonGroup toggle>

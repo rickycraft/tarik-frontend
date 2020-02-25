@@ -12,21 +12,26 @@ export class Window extends Component {
 
 	updateView = e => this.setState({ view: e.target.value });
 
-	updateTimestamp = n => {
+	updateBatch = n => {
 		const batch = this.state.batch + n;
-		this.setState({ batch: batch });
+		if (batch >= 0) this.setState({ batch: batch });
 	};
 
 	render() {
 		return (
 			<div className="flex-column flex-fill d-flex">
-				<NavPanel updateView={this.updateView} view={this.state.view} />
+				<NavPanel
+					updateView={this.updateView}
+					view={this.state.view}
+					updateBatch={this.updateBatch}
+					batch={this.state.batch}
+				/>
 				<div className="flex-grow-1 d-flex">
 					<div className="d-flex flex-grow-1">
 						<List />
 					</div>
 					<div className="d-flex flex-grow-2">
-						<FlowPacket view={this.state.view} packets={this.state.packets} update={this.updateTimestamp} />
+						<FlowPacket view={this.state.view} packets={this.state.packets} />
 					</div>
 				</div>
 			</div>
