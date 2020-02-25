@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Selector } from './Selector/Selector';
 import { FilterInput } from './FilterInput';
+import { Commands } from './Commands';
 
 export class NavPanel extends Component {
 	constructor(props) {
@@ -12,8 +13,7 @@ export class NavPanel extends Component {
 	}
 
 	addFilter = () => {
-		console.log(this.state.filter);
-		this.setState({ filter: '' });
+		alert('added filter ' + this.state.filter);
 	};
 	updateFilter = e => this.setState({ filter: e.target.value });
 
@@ -25,7 +25,7 @@ export class NavPanel extends Component {
 				</Navbar>
 				<Navbar bg="dark" variant="dark" className="text-light p-2 justify-content-between">
 					<Selector search className="d-flex flex-nowrap" />
-					<div className="d-flex" />
+					<Commands checked={this.props.view} onClick={this.props.updateView} />
 					<FilterInput
 						className="d-flex"
 						onChange={this.updateFilter}

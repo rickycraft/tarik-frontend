@@ -12,7 +12,7 @@ export class FilterInput extends Component {
 					onChange={this.props.onChange}
 					className="mr-2"
 				/>
-				<Button variant="outline-success" onClick={this.props.addFilter}>
+				<Button variant="success" onClick={this.props.addFilter}>
 					Search
 				</Button>
 			</Form>

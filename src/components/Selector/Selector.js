@@ -41,7 +41,7 @@ export class Selector extends Component {
 				/>
 				<div className="mr-3" />
 				<Button variant="success" onClick={this.search}>
-					search
+					Search
 				</Button>
 			</div>
 		);
