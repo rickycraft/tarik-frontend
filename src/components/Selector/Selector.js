@@ -1,43 +1,48 @@
 import React, { Component } from 'react';
-import { ServiceSelector } from './ServiceSelector';
-import { FilterSelector } from './FilterSelector';
 import { Button } from 'react-bootstrap';
+import { ButtonSelector } from './ButtonSelector';
 
 export class Selector extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			filter: 'empty',
 			service: 'all',
-			filter: 'no filter',
 			services: ['serv 1', 'serv 2', 'serv 3'],
 			filters: ['filt 1', 'filt 2', 'filt 3'],
 		};
 	}
 
-	serviceSelect = (key, e) => {
-		this.setState({ service: key });
+	loadSelector = () => {
+		// load from server
 	};
 
-	filterSelect = (key, e) => {
-		this.setState({ filter: key });
+	updateFilter = filter => this.setState({ filter: filter });
+	updateService = service => this.setState({ service: service });
+	search = () => {
+		console.dir({ filter: this.state.filter, state: this.state.service });
 	};
 
 	render() {
 		return (
 			<div className="d-flex align-items-center">
-				<ServiceSelector
-					onSelect={this.serviceSelect}
-					selected={this.state.service}
-					services={this.state.services}
-				/>
-				<div className="mr-3" />
-				<FilterSelector
-					onSelect={this.filterSelect}
+				<ButtonSelector
+					default="empty"
+					options={this.state.filters}
 					selected={this.state.filter}
-					filters={this.state.filters}
+					onSelect={this.updateFilter}
 				/>
 				<div className="mr-3" />
-				<Button variant="success">X</Button>
+				<ButtonSelector
+					default="all"
+					options={this.state.services}
+					selected={this.state.service}
+					onSelect={this.updateService}
+				/>
+				<div className="mr-3" />
+				<Button variant="success" onClick={this.search}>
+					search
+				</Button>
 			</div>
 		);
 	}

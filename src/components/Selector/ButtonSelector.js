@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
-export class ServiceSelector extends Component {
+export class ButtonSelector extends Component {
 	render() {
-		const services = this.props.services.map((service, i) => (
+		const options = this.props.options.map((service, i) => (
 			<Dropdown.Item key={i} eventKey={service} onSelect={this.props.onSelect}>
 				{service}
 			</Dropdown.Item>
@@ -11,11 +11,11 @@ export class ServiceSelector extends Component {
 
 		return (
 			<div>
-				<DropdownButton id="service-selector" title={this.props.selected} variant="secondary">
-					{services}
+				<DropdownButton id={this.props.default} title={this.props.selected} variant="secondary">
+					{options}
 					<Dropdown.Divider />
-					<Dropdown.Item onSelect={this.props.onSelect} eventKey="all">
-						all
+					<Dropdown.Item onSelect={this.props.onSelect} eventKey={this.props.default}>
+						{this.props.default}
 					</Dropdown.Item>
 				</DropdownButton>
 			</div>
