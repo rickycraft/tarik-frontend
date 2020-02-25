@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ListGroup } from 'react-bootstrap';
 
 /**
  index
@@ -6,11 +7,17 @@ import React, { Component } from 'react';
  */
 
 export class Line extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
 	render() {
-		return <div>test line</div>;
+		const quad = this.props.quad;
+		const body = `${quad[0]}:${quad[1]} - ${quad[2]}:${quad[3]}`;
+
+		return (
+			<ListGroup.Item action onClick={this.props.onClick} eventKey={this.props.id}>
+				<div className="d-flex justify-content-between">
+					{body}
+					<span className="mr-2">{this.props.id}</span>
+				</div>
+			</ListGroup.Item>
+		);
 	}
 }
