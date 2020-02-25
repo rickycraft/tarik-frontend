@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavPanel } from './NavPanel';
 import { List } from './List';
-import { FlowPacket } from './FlowPacket';
+import { FlowPacket } from './Flow/FlowPacket';
 
 export class Window extends Component {
 	constructor(props) {

@@ -15,7 +15,7 @@ export class BodyContainer extends Component {
 		return (
 			<Card className="flex-grow-2">
 				<Body body={packet.payload} language={packet.language} timestamp={packet.timestamp} />
-				<Card.Footer className="p-1 pl-2 pr-2 text-monospace" style={{ 'font-size': '10px' }}>
+				<Card.Footer className="p-1 pl-2 pr-2 text-monospace" style={{ fontSize: '10px' }}>
 					{packet.timestamp}
 				</Card.Footer>
 			</Card>
