@@ -12,10 +12,10 @@ export class NavPanel extends Component {
 		};
 	}
 
+	updateFilter = e => this.setState({ filter: e.target.value });
 	addFilter = () => {
 		alert('added filter ' + this.state.filter);
 	};
-	updateFilter = e => this.setState({ filter: e.target.value });
 
 	render() {
 		return (
@@ -26,7 +26,14 @@ export class NavPanel extends Component {
 					<div className="text-white font-weight-bold mr-2">Batch: {this.props.batch}</div>
 				</Navbar>
 				<Navbar bg="dark" variant="dark" className="text-light p-2 justify-content-between">
-					<Selector className="d-flex flex-nowrap" />
+					<Selector
+						className="d-flex flex-nowrap"
+						filter={this.props.filter}
+						updateFilter={this.props.updateFilter}
+						service={this.props.service}
+						updateService={this.props.updateService}
+						search={this.props.search}
+					/>
 					<Commands
 						checked={this.props.view}
 						onClick={this.props.updateView}

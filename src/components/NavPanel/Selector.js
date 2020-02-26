@@ -7,22 +7,10 @@ export class Selector extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			filter: 'empty',
-			service: 'all',
 			services: services(),
 			filters: filters(),
 		};
 	}
-
-	loadSelector = () => {
-		// load from server
-	};
-
-	updateFilter = filter => this.setState({ filter: filter });
-	updateService = service => this.setState({ service: service });
-	search = () => {
-		console.dir({ filter: this.state.filter, state: this.state.service });
-	};
 
 	render() {
 		return (
@@ -30,18 +18,18 @@ export class Selector extends Component {
 				<ButtonSelector
 					default="empty"
 					options={this.state.filters}
-					selected={this.state.filter}
-					onSelect={this.updateFilter}
+					selected={this.props.filter}
+					onSelect={this.props.updateFilter}
 				/>
 				<div className="mr-3" />
 				<ButtonSelector
 					default="all"
 					options={this.state.services}
-					selected={this.state.service}
-					onSelect={this.updateService}
+					selected={this.props.service}
+					onSelect={this.props.updateService}
 				/>
 				<div className="mr-3" />
-				<Button variant="success" onClick={this.search}>
+				<Button variant="success" onClick={this.props.search}>
 					Search
 				</Button>
 			</div>
