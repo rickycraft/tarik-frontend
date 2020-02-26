@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
-import { Selector } from './Selector/Selector';
+import { Selector } from './Selector';
 import { FilterInput } from './FilterInput';
 import { Commands } from './Commands';
 

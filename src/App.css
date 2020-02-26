@@ -4,5 +4,19 @@
 }
 
 .flex-grow-2 {
-	flex: 2 1 auto;
+	width: 70%;
+}
+
+.scroll-container {
+	overflow-y: scroll;
+	max-height: 100%;
+}
+
+.scroll-container-auto {
+	overflow-y: auto;
+	max-height: 100%;
+}
+
+.no-overflow {
+	overflow-y: hidden;
 }

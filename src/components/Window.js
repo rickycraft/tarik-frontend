@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { NavPanel } from './NavPanel';
-import { List } from './List';
+import { NavPanel } from './NavPanel/NavPanel';
+import { List } from './List/List';
 import { FlowPacket } from './Flow/FlowPacket';
 import { result } from '../services/search';
 
@@ -26,11 +26,11 @@ export class Window extends Component {
 					updateBatch={this.updateBatch}
 					batch={this.state.batch}
 				/>
-				<div className="flex-grow-1 d-flex">
-					<div className="d-flex flex-grow-1">
+				<div className="flex-grow-1 d-flex no-overflow">
+					<div className="d-flex flex-grow-1 no-overflow">
 						<List />
 					</div>
-					<div className="d-flex flex-grow-2">
+					<div className="d-flex flex-grow-2 no-overflow">
 						<FlowPacket view={this.state.view} packets={this.state.packets} />
 					</div>
 				</div>

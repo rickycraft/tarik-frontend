@@ -25,7 +25,7 @@ export class FlowPacket extends Component {
 				);
 		});
 
-		return <div className="flex-fill flex-column">{packet}</div>;
+		return <div className="flex-fill flex-column scroll-container-auto">{packet}</div>;
 	}
 }
 
