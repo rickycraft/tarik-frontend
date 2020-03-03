@@ -18,6 +18,7 @@ export class Selector extends Component {
 	async componentDidMount() {
 		const services = await getServices();
 		this.setState({ services: services });
+		this.props.search(this.state); // TODO remove in prod
 	}
 
 	updateFilter = filter => this.setState({ filter: filter });

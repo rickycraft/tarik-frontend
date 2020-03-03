@@ -8,8 +8,8 @@ export class Line extends Component {
 		return (
 			<ListGroup.Item
 				action
-				onClick={() => this.props.onClick(this.props.id)}
-				eventKey={this.props.id}
+				onClick={() => this.props.onClick(this.props.index)}
+				eventKey={this.props.index}
 				className="border-bottom"
 			>
 				<div className="d-flex justify-content-between align-items-center">

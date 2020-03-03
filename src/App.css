@@ -17,9 +17,9 @@
 	overflow-y: hidden;
 }
 
-div.card-body pre {
+/* div.card-body pre {
 	margin-bottom: 0px;
-}
+} */
 
 .btn:focus,
 .btn:active,

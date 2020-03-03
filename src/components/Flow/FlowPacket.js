@@ -3,34 +3,18 @@ import { BodyContainer } from './BodyContainer';
 import { localIp } from '../../services/utility';
 
 export class FlowPacket extends Component {
-	isInward = packet => {
-		return packet.src === localIp() ? true : false;
-	};
-
 	render() {
-		const packet = this.props.packets.map(packet => {
-			let body;
-			if (this.isInward(packet))
-				body = (
-					<>
-						<BodyContainer packet={packet} view={this.props.view} />
-						<div style={{ width: '20%' }} />
-					</>
-				);
-			else
-				body = (
-					<>
-						<div style={{ width: '20%' }} />
-						<BodyContainer packet={packet} view={this.props.view} />
-					</>
-				);
+		const packets = this.props.packets().map(packet => {
+			const inward = packet.src === localIp();
 			return (
 				<div className="d-flex m-3" key={packet.timestamp}>
-					{body}
+					{inward ? <div style={{ width: '20%' }} /> : ''}
+					<BodyContainer packet={packet} view={this.props.view} />
+					{!inward ? <div style={{ width: '20%' }} /> : ''}
 				</div>
 			);
 		});
 
-		return <div className="d-flex flex-fill flex-column scroll-container-auto">{packet}</div>;
+		return <div className="d-flex flex-fill flex-column scroll-container-auto">{packets}</div>;
 	}
 }

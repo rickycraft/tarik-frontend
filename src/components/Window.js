@@ -13,9 +13,9 @@ export class Window extends Component {
 		this.state = {
 			view: '0',
 			page: 0,
+			index: 0,
 			flows: [],
 			packets: [],
-			flowList: [],
 			filters: [],
 		};
 	}
@@ -30,33 +30,56 @@ export class Window extends Component {
 	}
 
 	handleKeypress = e => {
-		console.log('keypress', e.keyCode);
+		// console.log('keypress', e.keyCode);
+		const index = this.state.index;
+		switch (e.keyCode) {
+			case 39:
+				this.updatePage(1);
+				break;
+			case 37:
+				this.updatePage(-1);
+				break;
+			case 38:
+				this.updateIndex(index - 1);
+				break;
+			case 40:
+				this.updateIndex(index + 1);
+				break;
+			default:
+				break;
+		}
 	};
 
 	updateView = e => this.setState({ view: e.target.value });
-
-	updatePage = n => {
-		const page = this.state.page + n;
-		if (page >= 0) {
-			const listLen = 20;
-			const flowList = this.state.flows.slice(page * listLen, (page + 1) * listLen);
-			this.setState({ page: page, flowList: flowList });
-		}
-	};
 
 	updateFilters = async () => {
 		const filters = await getFilters();
 		this.setState({ filters: filters });
 	};
 
-	search = async selector => {
-		const flows = await getFlows(selector.filter, selector.service, selector.min, selector.ago);
-		this.setState({ flows: flows, page: 0 }, () => this.updatePage(0));
+	updatePage = n => {
+		const page = this.state.page + n;
+		if (page > -1 && this.bound.max < this.state.flows.length - 1) this.setState({ page: page });
 	};
 
-	listClick = id => {
-		const flow = this.state.flows.find(flow => flow.id === id);
-		this.setState({ packets: flow.packets });
+	updateIndex = index => {
+		if (index < this.bound.min || index > this.bound.max) return;
+		this.setState({ index: index });
+	};
+
+	flowList = () => this.state.flows.slice(this.bound.min, this.bound.max + 1);
+
+	packetList = () => {
+		try {
+			return this.state.flows[this.state.index].packets;
+		} catch {
+			return [];
+		}
+	};
+
+	search = async selector => {
+		const flows = await getFlows(selector.filter, selector.service, selector.min, selector.ago);
+		this.setState({ flows: flows, page: 0, index: 0 });
 	};
 
 	render() {
@@ -73,13 +96,24 @@ export class Window extends Component {
 				</Navbar>
 				<div className="d-flex flex-fill no-overflow">
 					<div className="d-flex no-overflow" style={{ width: '30vw' }}>
-						<List onClick={this.listClick} flows={this.state.flowList} />
+						<List onClick={this.updateIndex} flows={this.flowList} index={this.state.index} />
 					</div>
 					<div className="d-flex no-overflow" style={{ width: '70vw' }}>
-						<FlowPacket view={this.state.view} packets={this.state.packets} />
+						<FlowPacket view={this.state.view} packets={this.packetList} />
 					</div>
 				</div>
 			</div>
 		);
+	}
+
+	get bound() {
+		const listLen = 20;
+		const min = this.state.page * listLen;
+		const max = min + listLen;
+		const len = this.state.flows.length;
+		return {
+			min: min,
+			max: max < len ? max : len - 1,
+		};
 	}
 }

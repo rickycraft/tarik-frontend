@@ -83,7 +83,7 @@ export async function getFlows(filter, service, min, ago) {
 			p_dest: 80,
 			packets: [
 				{
-					content: 'SGVhZGVyOiBcbmNpYW8gYW5kYXRh',
+					content: 'YW5kYXRhIDI=',
 					id: 10,
 					timestamp: 10,
 					src: '1.1.1.1',
