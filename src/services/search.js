@@ -1,4 +1,5 @@
 // all fetch calls are here
+// const delay = require('delay');
 
 export async function getServices() {
 	return ['serv 1', 'serv 2', 'serv 3', 'serv 4'];
@@ -8,7 +9,12 @@ export async function getFilters() {
 	return ['filt 1', 'filt 2', 'filt 3'];
 }
 
-export async function result(filter, service, min, ago) {
+export async function addFilter(filter) {
+	if (filter !== '') console.log('added filter', filter);
+	return null;
+}
+
+export async function getFlows(filter, service, min, ago) {
 	console.log(filter, service, min, ago);
 	return [
 		{
@@ -40,11 +46,6 @@ export async function result(filter, service, min, ago) {
 		},
 	];
 }
-
-export async function addFilter(filter) {
-	if (filter !== '') console.log('added filter', filter);
-}
-
 /* 
 type Flow struct {
 	Id int              `json:"id"`

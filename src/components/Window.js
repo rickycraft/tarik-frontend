@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { List } from './List/List';
 import { FlowPacket } from './Flow/FlowPacket';
-import { result } from '../services/search';
+import { getFlows, getFilters } from '../services/search';
 import { Navbar } from 'react-bootstrap';
 import { Selector } from './NavPanel/Selector';
 import { FilterInput } from './NavPanel/FilterInput';
 import { Commands } from './NavPanel/Commands';
-import { getFilters } from '../services/search';
 
 export class Window extends Component {
 	constructor(props) {
@@ -21,8 +20,8 @@ export class Window extends Component {
 		};
 	}
 
-	async componentDidMount() {
-		await this.updateFilters();
+	componentDidMount() {
+		this.updateFilters();
 	}
 
 	updateView = e => this.setState({ view: e.target.value });
@@ -39,13 +38,11 @@ export class Window extends Component {
 	updateFilters = async () => {
 		const filters = await getFilters();
 		this.setState({ filters: filters });
-		console.log('update filters');
 	};
 
 	search = async selector => {
-		const flows = await result(selector.filter, selector.service, selector.min, selector.ago);
-		await this.setState({ flows: flows, page: 0 });
-		this.updatePage(0);
+		const flows = await getFlows(selector.filter, selector.service, selector.min, selector.ago);
+		this.setState({ flows: flows, page: 0 }, () => this.updatePage(0));
 	};
 
 	listClick = id => {
@@ -56,12 +53,9 @@ export class Window extends Component {
 	render() {
 		return (
 			<div className="flex-column flex-fill d-flex">
-				<Navbar className="p-2" bg="primary">
-					<Navbar.Brand className="text-light m-0 p-0 ml-3">Tarik</Navbar.Brand>
-					<div className="flex-fill" />
-					<div className="text-white font-weight-bold mr-2">
-						Last {this.state.min} min / Page: {this.state.page}
-					</div>
+				<Navbar className="p-2 justify-content-between" bg="primary">
+					<Navbar.Brand className="text-light m-0 p-0 ml-3">TARIK</Navbar.Brand>
+					<div className="text-white font-weight-bold mr-2">Page: {this.state.page}</div>
 				</Navbar>
 				<Navbar bg="dark" variant="dark" className="text-light p-2 justify-content-between">
 					<Selector className="d-flex flex-nowrap" search={this.search} filters={this.state.filters} />

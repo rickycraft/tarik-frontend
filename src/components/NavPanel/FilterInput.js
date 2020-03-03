@@ -5,16 +5,18 @@ import { addFilter } from '../../services/search';
 export class FilterInput extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { filter: '' };
+		this.state = { filter: '', isloading: false };
 	}
 
 	onChange = e => this.setState({ filter: e.target.value });
 
 	insertFilter = async () => {
 		if (this.state.filter !== '') {
+			this.setState({ isloading: true });
 			await addFilter(this.state.filter);
-			this.setState({ filter: '' });
-		} else await this.props.updateFilters();
+			this.setState({ filter: '', isloading: false });
+		}
+		this.props.updateFilters();
 	};
 
 	render() {
@@ -22,12 +24,12 @@ export class FilterInput extends Component {
 			<Form inline>
 				<FormControl
 					type="text"
-					placeholder="New filter"
+					placeholder="add filter"
 					value={this.state.filter}
 					onChange={this.onChange}
 					className="mr-2"
 				/>
-				<Button variant="success" onClick={this.insertFilter}>
+				<Button variant="success" onClick={this.insertFilter} disabled={this.state.isloading}>
 					Search
 				</Button>
 			</Form>
