@@ -15,9 +15,6 @@ export class Window extends Component {
 			page: 0,
 			flows: [],
 			packets: [],
-			filter: 'empty',
-			service: 'all',
-			min: 1,
 			flowList: [],
 		};
 	}
@@ -33,12 +30,8 @@ export class Window extends Component {
 		}
 	};
 
-	updateFilter = filter => this.setState({ filter: filter });
-	updateService = service => this.setState({ service: service });
-	updateMin = min => this.setState({ min: min });
-
-	search = async () => {
-		const flows = result(this.state.service, this.state.filter, this.state.page);
+	search = async selector => {
+		const flows = result(selector.filter, selector.service, selector.min, selector.ago);
 		await this.setState({ flows: flows });
 		// await this.setState({ flows: this.test() });
 		await this.setState({ page: 0 });
@@ -66,21 +59,8 @@ export class Window extends Component {
 					</div>
 				</Navbar>
 				<Navbar bg="dark" variant="dark" className="text-light p-2 justify-content-between">
-					<Selector
-						className="d-flex flex-nowrap"
-						filter={this.state.filter}
-						updateFilter={this.updateFilter}
-						service={this.state.service}
-						updateService={this.updateService}
-						search={this.search}
-					/>
-					<Commands
-						checked={this.state.view}
-						onClick={this.updateView}
-						updatePage={this.updatePage}
-						min={this.state.min}
-						updateMin={this.updateMin}
-					/>
+					<Selector className="d-flex flex-nowrap" search={this.search} />
+					<Commands checked={this.state.view} onClick={this.updateView} updatePage={this.updatePage} />
 					<FilterInput className="d-flex" addFilter={this.addFilter} />
 				</Navbar>
 				<div className="flex-grow-1 d-flex no-overflow">

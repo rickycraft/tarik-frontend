@@ -8,8 +8,8 @@ export function filters() {
 	return ['filt 1', 'filt 2', 'filt 3'];
 }
 
-export function result(service, filter, timestamp) {
-	console.log(service, filter, timestamp);
+export function result(filter, service, min, ago) {
+	console.log(filter, service, min, ago);
 	return [
 		{
 			packets: [
