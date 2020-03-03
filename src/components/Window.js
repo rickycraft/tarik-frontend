@@ -21,8 +21,8 @@ export class Window extends Component {
 		};
 	}
 
-	componentDidMount() {
-		this.updateFilters();
+	async componentDidMount() {
+		await this.updateFilters();
 	}
 
 	updateView = e => this.setState({ view: e.target.value });
@@ -36,28 +36,21 @@ export class Window extends Component {
 		}
 	};
 
-	updateFilters = () => {
-		const filters = getFilters();
+	updateFilters = async () => {
+		const filters = await getFilters();
 		this.setState({ filters: filters });
 		console.log('update filters');
 	};
 
 	search = async selector => {
-		const flows = result(selector.filter, selector.service, selector.min, selector.ago);
-		await this.setState({ flows: flows });
-		// await this.setState({ flows: this.test() });
-		await this.setState({ page: 0 });
+		const flows = await result(selector.filter, selector.service, selector.min, selector.ago);
+		await this.setState({ flows: flows, page: 0 });
 		this.updatePage(0);
 	};
 
 	listClick = id => {
 		const flow = this.state.flows.find(flow => flow.id === id);
 		this.setState({ packets: flow.packets });
-	};
-
-	test = () => {
-		let arr = new Array(100).fill({});
-		return arr.map((val, index) => ({ packets: [{ quad: ['1.1.1.1', 80, '192.168.1.100', 80] }], id: index }));
 	};
 
 	render() {

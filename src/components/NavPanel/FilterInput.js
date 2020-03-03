@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button, FormControl } from 'react-bootstrap';
-import { addFilter } from '../../services/update';
+import { addFilter } from '../../services/search';
 
 export class FilterInput extends Component {
 	constructor(props) {
@@ -10,11 +10,11 @@ export class FilterInput extends Component {
 
 	onChange = e => this.setState({ filter: e.target.value });
 
-	addFilter = () => {
+	insertFilter = async () => {
 		if (this.state.filter !== '') {
-			addFilter(this.state.filter);
+			await addFilter(this.state.filter);
 			this.setState({ filter: '' });
-		} else this.props.updateFilters();
+		} else await this.props.updateFilters();
 	};
 
 	render() {
@@ -27,7 +27,7 @@ export class FilterInput extends Component {
 					onChange={this.onChange}
 					className="mr-2"
 				/>
-				<Button variant="success" onClick={this.addFilter}>
+				<Button variant="success" onClick={this.insertFilter}>
 					Search
 				</Button>
 			</Form>

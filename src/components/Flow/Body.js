@@ -3,11 +3,6 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { xcode } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Card } from 'react-bootstrap';
 
-/*
-    view [hex,http,text]
-    body
-*/
-
 export class Body extends Component {
 	render() {
 		let body;

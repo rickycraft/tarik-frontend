@@ -1,55 +1,64 @@
 // all fetch calls are here
 
-export function getServices() {
+export async function getServices() {
 	return ['serv 1', 'serv 2', 'serv 3', 'serv 4'];
 }
 
-export function getFilters() {
+export async function getFilters() {
 	return ['filt 1', 'filt 2', 'filt 3'];
 }
 
-export function result(filter, service, min, ago) {
+export async function result(filter, service, min, ago) {
 	console.log(filter, service, min, ago);
 	return [
 		{
-			packets: [
-				{
-					payload: 'Header: \nciao andata',
-					timestamp: 10,
-					quad: ['1.1.1.1', 80, '192.168.1.100', 80], // fromip fromport toip toport
-				},
-				{
-					payload: 'Header: \nciao ritorno',
-					timestamp: 11,
-					quad: ['192.168.1.100', 80, '1.1.1.1', 80], // fromip fromport toip toport
-				},
-				{
-					payload: 'Header: \nciao ritorno 2',
-					timestamp: 110,
-					quad: ['192.168.1.100', 80, '1.1.1.1', 80], // fromip fromport toip toport
-				},
-			],
 			id: 1,
-		},
-		{
+			ip_src: '1.1.1.1',
+			p_src: 80,
+			ip_dest: '192.168.1.100',
+			p_dest: 80,
 			packets: [
 				{
-					payload: 'Header: \nciao andata f2',
+					content: 'Header: \nciao andata',
+					id: 10,
 					timestamp: 10,
-					quad: ['1.1.1.1', 80, '192.168.1.100', 80], // fromip fromport toip toport
+					src: '1.1.1.1',
 				},
 				{
-					payload: 'Header: \nciao ritorno f2',
+					content: 'Header: \nciao ritorno',
+					id: 11,
 					timestamp: 11,
-					quad: ['192.168.1.100', 80, '1.1.1.1', 80], // fromip fromport toip toport
+					src: '192.168.1.100',
 				},
 				{
-					payload: 'Header: \nciao ritorno 2 f2',
-					timestamp: 110,
-					quad: ['192.168.1.100', 80, '1.1.1.1', 80], // fromip fromport toip toport
+					content: 'Header: \nciao ritorno 2',
+					id: 12,
+					timestamp: 12,
+					src: '1.1.1.1',
 				},
 			],
-			id: 2,
 		},
 	];
 }
+
+export async function addFilter(filter) {
+	if (filter !== '') console.log('added filter', filter);
+}
+
+/* 
+type Flow struct {
+	Id int              `json:"id"`
+	IpSrc string        `json:"ip_src"`
+	PSrc int            `json:"p_src"`
+	IpDest string       `json:"ip_dest"`
+	PDest int           `json:"p_dest"`
+	Packets []Packet    `json:"packets"`
+}
+
+type Packet struct {
+	Id int              `json:"id"`
+	Src string          `json:"src"`
+	Timestamp float64   `json:"timestamp"`
+	Content []byte      `json:"content"`
+}
+*/

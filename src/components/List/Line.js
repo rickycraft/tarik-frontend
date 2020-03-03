@@ -8,13 +8,12 @@ import { ListGroup } from 'react-bootstrap';
 
 export class Line extends Component {
 	render() {
-		const quad = this.props.quad;
-		const body = `${quad[0]}:${quad[1]} - ${quad[2]}:${quad[3]}`;
+		const from_to = `${this.props.src} - ${this.props.dest}`;
 
 		return (
 			<ListGroup.Item action onClick={() => this.props.onClick(this.props.id)} eventKey={this.props.id}>
 				<div className="d-flex justify-content-between">
-					{body}
+					{from_to}
 					<span className="mr-2">{this.props.id}</span>
 				</div>
 			</ListGroup.Item>

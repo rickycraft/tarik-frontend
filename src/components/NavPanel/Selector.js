@@ -11,8 +11,13 @@ export class Selector extends Component {
 			ago: 1,
 			service: 'all',
 			filter: 'empty',
-			services: getServices(),
+			services: [],
 		};
+	}
+
+	async componentDidMount() {
+		const services = await getServices();
+		this.setState({ services: services });
 	}
 
 	updateFilter = filter => this.setState({ filter: filter });
