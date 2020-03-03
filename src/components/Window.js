@@ -22,7 +22,16 @@ export class Window extends Component {
 
 	componentDidMount() {
 		this.updateFilters();
+		document.addEventListener('keydown', this.handleKeypress);
 	}
+
+	componentWillUnmount() {
+		document.removeEventListener('keydown', this.handleKeypress);
+	}
+
+	handleKeypress = e => {
+		console.log('keypress', e.keyCode);
+	};
 
 	updateView = e => this.setState({ view: e.target.value });
 
