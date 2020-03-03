@@ -30,7 +30,7 @@ export class Window extends Component {
 	}
 
 	handleKeypress = e => {
-		// console.log('keypress', e.keyCode);
+		console.log('keypress', e.keyCode);
 		const index = this.state.index;
 		switch (e.keyCode) {
 			case 39:
@@ -44,6 +44,10 @@ export class Window extends Component {
 				break;
 			case 40:
 				this.updateIndex(index + 1);
+				break;
+			case 72:
+				// h set to hex
+				this.setState({ view: '2' });
 				break;
 			default:
 				break;

@@ -8,7 +8,7 @@ export class Selector extends Component {
 		super(props);
 		this.state = {
 			min: 1,
-			ago: 1,
+			ago: 0,
 			service: 'all',
 			filter: 'empty',
 			services: [],
@@ -18,26 +18,24 @@ export class Selector extends Component {
 	async componentDidMount() {
 		const services = await getServices();
 		this.setState({ services: services });
-		this.props.search(this.state); // TODO remove in prod
+		// this.props.search(this.state); // TODO remove in prod
 	}
 
 	updateFilter = filter => this.setState({ filter: filter });
 	updateService = service => this.setState({ service: service });
-	updateMin = min => this.setState({ min: min });
-	updateAgo = ago => this.setState({ ago: ago });
+	updateMin = min => this.setState({ min: parseInt(min) });
+	updateAgo = ago => this.setState({ ago: parseInt(ago) });
 
 	render() {
-		const opt = [1, 3, 5, 10, 20];
-
-		const mins = opt.map(val => (
+		const mins = [1, 3, 5, 10, 20].map(val => (
 			<Dropdown.Item key={val} eventKey={val} onSelect={this.updateMin}>
-				for {val}min
+				{val}min
 			</Dropdown.Item>
 		));
 
-		const ago = opt.map(val => (
+		const ago = [0, 3, 5, 10, 20].map(val => (
 			<Dropdown.Item key={val} eventKey={val} onSelect={this.updateAgo}>
-				{val}min ago
+				{val}min
 			</Dropdown.Item>
 		));
 
@@ -46,33 +44,26 @@ export class Selector extends Component {
 				<ButtonSelector
 					default="empty"
 					options={this.props.filters}
-					selected={this.state.filter}
+					selected={'filter ' + this.state.filter}
 					onSelect={this.updateFilter}
 				/>
 				<div className="mr-3" />
 				<ButtonSelector
 					default="all"
 					options={this.state.services}
-					selected={this.state.service}
+					selected={'service ' + this.state.service}
 					onSelect={this.updateService}
 				/>
 				<div className="mr-3" />
 				<DropdownButton
 					default="1"
-					title={this.state.min}
-					id="dropdown-min"
-					className="mr-3"
+					title={'for ' + this.state.min + ' min'}
 					variant="secondary"
+					className="mr-3"
 				>
 					{mins}
 				</DropdownButton>
-				<DropdownButton
-					default="1"
-					title={this.state.ago}
-					id="dropdown-ago"
-					className="mr-3"
-					variant="secondary"
-				>
+				<DropdownButton default="0" title={this.state.ago + ' min ago'} variant="secondary" className="mr-3">
 					{ago}
 				</DropdownButton>
 				<Button variant="success" onClick={() => this.props.search(this.state)}>
