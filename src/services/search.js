@@ -1,20 +1,43 @@
 // all fetch calls are here
 // const delay = require('delay');
+const url = 'http://test';
 
 export async function getServices() {
+	// const res = await fetch(url+'/services').then(res => res.json());
+	// if (res.ok) {
+	// 	return res;
+	// }
 	return ['serv 1', 'serv 2', 'serv 3', 'serv 4'];
 }
 
 export async function getFilters() {
+	// const res = await fetch(url+'/filters').then(res => res.json());
+	// if (res.ok) {
+	// 	return res;
+	// }
 	return ['filt 1', 'filt 2', 'filt 3'];
 }
 
 export async function addFilter(filter) {
 	if (filter !== '') console.log('added filter', filter);
-	return null;
+	// const res = await fetch(url+'/filters', {
+	// 	method: 'POST',
+	//  body: JSON.stringify({ filter: filter });
+	// });
+	// if (res.ok) return res;
 }
 
 export async function getFlows(filter, service, min, ago) {
+	// const body = {
+	// 	filter: filter,
+	// 	service: service,
+	// 	timeStart: min,
+	// 	timeEnd: ago,
+	// };
+	// const res = await fetch(url + '/flow', {
+	// 	method: 'GET',
+	// 	body: JSON.stringify(body),
+	// }).then(res => res.json);
 	console.log(filter, service, min, ago);
 	return [
 		{
