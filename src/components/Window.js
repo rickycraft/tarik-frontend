@@ -6,6 +6,7 @@ import { Navbar } from 'react-bootstrap';
 import { Selector } from './NavPanel/Selector';
 import { FilterInput } from './NavPanel/FilterInput';
 import { Commands } from './NavPanel/Commands';
+import { getFilters } from '../services/search';
 
 export class Window extends Component {
 	constructor(props) {
@@ -16,7 +17,12 @@ export class Window extends Component {
 			flows: [],
 			packets: [],
 			flowList: [],
+			filters: [],
 		};
+	}
+
+	componentDidMount() {
+		this.updateFilters();
 	}
 
 	updateView = e => this.setState({ view: e.target.value });
@@ -28,6 +34,12 @@ export class Window extends Component {
 			const flowList = this.state.flows.slice(page * listLen, (page + 1) * listLen);
 			this.setState({ page: page, flowList: flowList });
 		}
+	};
+
+	updateFilters = () => {
+		const filters = getFilters();
+		this.setState({ filters: filters });
+		console.log('update filters');
 	};
 
 	search = async selector => {
@@ -59,9 +71,9 @@ export class Window extends Component {
 					</div>
 				</Navbar>
 				<Navbar bg="dark" variant="dark" className="text-light p-2 justify-content-between">
-					<Selector className="d-flex flex-nowrap" search={this.search} />
+					<Selector className="d-flex flex-nowrap" search={this.search} filters={this.state.filters} />
 					<Commands checked={this.state.view} onClick={this.updateView} updatePage={this.updatePage} />
-					<FilterInput className="d-flex" addFilter={this.addFilter} />
+					<FilterInput className="d-flex" updateFilters={this.updateFilters} />
 				</Navbar>
 				<div className="flex-grow-1 d-flex no-overflow">
 					<div className="d-flex flex-grow-1 no-overflow">

@@ -1,3 +1,3 @@
-export function newfilter(filter) {
-	console.log('added filter', filter);
+export function addFilter(filter) {
+	if (filter !== '') console.log('added filter', filter);
 }

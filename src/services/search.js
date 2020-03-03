@@ -1,10 +1,10 @@
 // all fetch calls are here
 
-export function services() {
+export function getServices() {
 	return ['serv 1', 'serv 2', 'serv 3', 'serv 4'];
 }
 
-export function filters() {
+export function getFilters() {
 	return ['filt 1', 'filt 2', 'filt 3'];
 }
 

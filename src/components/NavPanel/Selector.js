@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import { ButtonSelector } from './ButtonSelector';
-import { services, filters } from '../../services/search';
+import { getServices } from '../../services/search';
 
 export class Selector extends Component {
 	constructor(props) {
@@ -11,8 +11,7 @@ export class Selector extends Component {
 			ago: 1,
 			service: 'all',
 			filter: 'empty',
-			services: services(),
-			filters: filters(),
+			services: getServices(),
 		};
 	}
 
@@ -41,7 +40,7 @@ export class Selector extends Component {
 				<ButtonSelector
 					className="mr-3"
 					default="empty"
-					options={this.state.filters}
+					options={this.props.filters}
 					selected={this.state.filter}
 					onSelect={this.updateFilter}
 				/>

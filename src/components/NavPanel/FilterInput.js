@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button, FormControl } from 'react-bootstrap';
+import { addFilter } from '../../services/update';
 
 export class FilterInput extends Component {
 	constructor(props) {
@@ -10,7 +11,10 @@ export class FilterInput extends Component {
 	onChange = e => this.setState({ filter: e.target.value });
 
 	addFilter = () => {
-		console.log('add filter', this.state.filter);
+		if (this.state.filter !== '') {
+			addFilter(this.state.filter);
+			this.setState({ filter: '' });
+		} else this.props.updateFilters();
 	};
 
 	render() {
