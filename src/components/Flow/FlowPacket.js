@@ -14,13 +14,13 @@ export class FlowPacket extends Component {
 				body = (
 					<>
 						<BodyContainer packet={packet} view={this.props.view} />
-						<div className="flex-grow-1" />
+						<div style={{ width: '20%' }} />
 					</>
 				);
 			else
 				body = (
 					<>
-						<div className="flex-grow-1" />
+						<div style={{ width: '20%' }} />
 						<BodyContainer packet={packet} view={this.props.view} />
 					</>
 				);
@@ -31,6 +31,6 @@ export class FlowPacket extends Component {
 			);
 		});
 
-		return <div className="flex-fill flex-column scroll-container-auto">{packet}</div>;
+		return <div className="d-flex flex-fill flex-column scroll-container-auto">{packet}</div>;
 	}
 }

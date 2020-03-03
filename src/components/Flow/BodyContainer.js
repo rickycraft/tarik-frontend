@@ -7,7 +7,7 @@ export class BodyContainer extends Component {
 		const packet = this.props.packet;
 
 		return (
-			<Card className="flex-grow-2">
+			<Card style={{ width: '80%' }}>
 				<Body body={packet.content} view={this.props.view} id={packet.id} />
 				<Card.Footer className="py-1 px-2 text-monospace" style={{ fontSize: '10px' }}>
 					{packet.timestamp}

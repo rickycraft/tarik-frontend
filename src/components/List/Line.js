@@ -6,8 +6,13 @@ export class Line extends Component {
 		const from_to = `${this.props.src} - ${this.props.dest}`;
 
 		return (
-			<ListGroup.Item action onClick={() => this.props.onClick(this.props.id)} eventKey={this.props.id}>
-				<div className="d-flex justify-content-between">
+			<ListGroup.Item
+				action
+				onClick={() => this.props.onClick(this.props.id)}
+				eventKey={this.props.id}
+				className="border-bottom"
+			>
+				<div className="d-flex justify-content-between align-items-center">
 					{from_to}
 					<span className="mr-2">id: {this.props.id}</span>
 				</div>

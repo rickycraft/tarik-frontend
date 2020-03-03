@@ -16,11 +16,6 @@ export class List extends Component {
 			<Line id={line.id} src={line.src} dest={line.dest} onClick={this.props.onClick} key={line.id} />
 		));
 
-		return (
-			<div className="flex-fill bg-light no-overflow">
-				<ListGroup className="list-group-flush mb-4 scroll-container">{lines}</ListGroup>
-				<div className="bg-dark" />
-			</div>
-		);
+		return <ListGroup className="flex-fill list-group-flush scroll-container">{lines}</ListGroup>;
 	}
 }

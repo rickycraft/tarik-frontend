@@ -42,14 +42,13 @@ export class Selector extends Component {
 
 		return (
 			<div className="d-flex align-items-center">
-				<div className="mx-3">
-					<ButtonSelector
-						default="empty"
-						options={this.props.filters}
-						selected={this.state.filter}
-						onSelect={this.updateFilter}
-					/>
-				</div>
+				<ButtonSelector
+					default="empty"
+					options={this.props.filters}
+					selected={this.state.filter}
+					onSelect={this.updateFilter}
+				/>
+				<div className="mr-3" />
 				<ButtonSelector
 					default="all"
 					options={this.state.services}

@@ -66,16 +66,16 @@ export class Window extends Component {
 					<Navbar.Brand className="text-light m-0 p-0 ml-3">TARIK</Navbar.Brand>
 					<div className="text-white font-weight-bold mr-2">Page: {this.state.page}</div>
 				</Navbar>
-				<Navbar bg="dark" variant="dark" className="text-light p-2 justify-content-between">
+				<Navbar bg="dark" variant="dark" className="text-light p-3 justify-content-between">
 					<Selector className="d-flex flex-nowrap" search={this.search} filters={this.state.filters} />
 					<Commands checked={this.state.view} onClick={this.updateView} updatePage={this.updatePage} />
 					<FilterInput className="d-flex" updateFilters={this.updateFilters} />
 				</Navbar>
-				<div className="flex-grow-1 d-flex no-overflow">
-					<div className="d-flex flex-grow-1 no-overflow">
+				<div className="d-flex flex-fill no-overflow">
+					<div className="d-flex no-overflow" style={{ width: '30vw' }}>
 						<List onClick={this.listClick} flows={this.state.flowList} />
 					</div>
-					<div className="d-flex flex-grow-2 no-overflow">
+					<div className="d-flex no-overflow" style={{ width: '70vw' }}>
 						<FlowPacket view={this.state.view} packets={this.state.packets} />
 					</div>
 				</div>

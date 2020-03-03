@@ -3,10 +3,6 @@
 	display: flex;
 }
 
-.flex-grow-2 {
-	width: 70%;
-}
-
 .scroll-container {
 	overflow-y: scroll;
 	max-height: 100%;
@@ -19,4 +15,15 @@
 
 .no-overflow {
 	overflow-y: hidden;
+}
+
+div.card-body pre {
+	margin-bottom: 0px;
+}
+
+.btn:focus,
+.btn:active,
+.btn-primary.focus {
+	outline: none !important;
+	box-shadow: none !important;
 }
